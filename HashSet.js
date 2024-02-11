@@ -20,14 +20,6 @@ class HashSet extends HashMap {
 
     return listIndex !== null ? key : null;
   }
-
-  static values() {
-    return undefined;
-  }
-
-  static entries() {
-    return undefined;
-  }
 }
 
 module.exports = HashSet;

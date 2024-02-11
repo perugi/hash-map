@@ -65,9 +65,13 @@ class HashMap {
   }
 
   toString() {
+    let string = '';
+
     this._buckets.forEach((bucket, index) => {
-      console.log(`[${index}]: ${bucket.toString()}`);
+      string += `[${index}]: ${bucket.toString()}\n`;
     });
+
+    return string;
   }
 
   clear() {

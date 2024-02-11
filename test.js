@@ -66,3 +66,6 @@ set.set('test');
 console.log(set.length());
 console.log(set.toString());
 console.log(set.get('test'));
+console.log(set.keys());
+console.log(set.values());
+console.log(set.entries());
