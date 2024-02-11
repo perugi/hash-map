@@ -1,49 +1,55 @@
 const LinkedList = require('@perugi/linked-list');
-const hash = require('./hash');
 
 class HashMap {
-  capacity;
+  _capacity;
 
-  loadFactor;
+  _loadFactor;
 
-  buckets;
+  _buckets;
 
-  threshold;
+  _threshold;
 
   constructor() {
-    this.capacity = 16;
-    this.loadFactor = 0.75;
-    this.#calculateThreshold();
-    this.buckets = new Array(this.capacity)
+    this._capacity = 16;
+    this._loadFactor = 0.75;
+    this._calculateThreshold();
+    this._buckets = new Array(this._capacity)
       .fill(null)
       .map(() => new LinkedList());
   }
 
   set(key, value) {
-    const bucket = this.#getBucket(hash(key, this.capacity));
-    bucket.append([key, value]);
+    const bucket = this._getBucket(this._hash(key));
+    const listIndex = bucket.search((node) => node.value[0] === key);
 
-    if (this.keys().length >= this.threshold) {
-      this.#resize();
+    if (listIndex !== null) {
+      // key already exists in the map, update the value
+      bucket.at(listIndex).value[1] = value;
+    } else {
+      bucket.append([key, value]);
+
+      if (this.keys().length >= this._threshold) {
+        this._resize();
+      }
     }
   }
 
   get(key) {
-    const bucket = this.#getBucket(hash(key, this.capacity));
+    const bucket = this._getBucket(this._hash(key));
     const listIndex = bucket.search((node) => node.value[0] === key);
 
     return listIndex !== null ? bucket.at(listIndex).value[1] : null;
   }
 
   has(key) {
-    const bucket = this.#getBucket(hash(key, this.capacity));
+    const bucket = this._getBucket(this._hash(key));
     const listIndex = bucket.search((node) => node.value[0] === key);
 
     return listIndex !== null;
   }
 
   remove(key) {
-    const bucket = this.#getBucket(hash(key, this.capacity));
+    const bucket = this._getBucket(this._hash(key));
     const listIndex = bucket.search((node) => node.value[0] === key);
 
     if (listIndex !== null) {
@@ -55,23 +61,23 @@ class HashMap {
   }
 
   length() {
-    return this.buckets.reduce((acc, bucket) => acc + bucket.size(), 0);
+    return this._buckets.reduce((acc, bucket) => acc + bucket.size(), 0);
   }
 
   toString() {
-    this.buckets.forEach((bucket, index) => {
+    this._buckets.forEach((bucket, index) => {
       console.log(`[${index}]: ${bucket.toString()}`);
     });
   }
 
   clear() {
-    this.buckets = new Array(this.capacity)
+    this._buckets = new Array(this._capacity)
       .fill(null)
       .map(() => new LinkedList());
   }
 
   keys() {
-    return this.buckets.reduce((acc, bucket) => {
+    return this._buckets.reduce((acc, bucket) => {
       for (let i = 0; i < bucket.size(); i++) {
         acc.push(bucket.at(i).value[0]);
       }
@@ -80,7 +86,7 @@ class HashMap {
   }
 
   values() {
-    return this.buckets.reduce((acc, bucket) => {
+    return this._buckets.reduce((acc, bucket) => {
       for (let i = 0; i < bucket.size(); i++) {
         acc.push(bucket.at(i).value[1]);
       }
@@ -89,7 +95,7 @@ class HashMap {
   }
 
   entries() {
-    return this.buckets.reduce((acc, bucket) => {
+    return this._buckets.reduce((acc, bucket) => {
       for (let i = 0; i < bucket.size(); i++) {
         acc.push(bucket.at(i).value);
       }
@@ -97,23 +103,23 @@ class HashMap {
     }, []);
   }
 
-  #getBucket(index) {
-    if (index < 0 || index >= this.buckets.length) {
+  _getBucket(index) {
+    if (index < 0 || index >= this._buckets.length) {
       throw new Error('Index out of bounds');
     }
-    return this.buckets[index];
+    return this._buckets[index];
   }
 
-  #calculateThreshold() {
-    this.threshold = Math.floor(this.capacity * this.loadFactor);
+  _calculateThreshold() {
+    this._threshold = Math.floor(this._capacity * this._loadFactor);
   }
 
-  #resize() {
-    const oldBuckets = this.buckets;
-    this.capacity *= 2;
-    this.#calculateThreshold();
+  _resize() {
+    const oldBuckets = this._buckets;
+    this._capacity *= 2;
+    this._calculateThreshold();
 
-    this.buckets = new Array(this.capacity)
+    this._buckets = new Array(this._capacity)
       .fill(null)
       .map(() => new LinkedList());
     oldBuckets.forEach((bucket) => {
@@ -121,6 +127,18 @@ class HashMap {
         this.set(bucket.at(i).value[0], bucket.at(i).value[1]);
       }
     });
+  }
+
+  _hash(key) {
+    let hashCode = 0;
+
+    const primeNumber = 31;
+    for (let i = 0; i < key.length; i++) {
+      hashCode += primeNumber * hashCode + key.charCodeAt(i);
+      hashCode %= this._capacity;
+    }
+
+    return hashCode;
   }
 }
 

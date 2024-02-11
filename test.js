@@ -44,6 +44,11 @@ for (let i = 0; i < 15; i++) {
 
 map.toString();
 
+map.set('test', 'test');
+console.log(map.get('test'));
+map.set('test', 'test2');
+console.log(map.get('test'));
+
 // for (let i = 0; i < 100; i++) {
 //   const key = Math.random().toString(36).substring(7);
 //   const value = `value${i}`;
