@@ -1,4 +1,5 @@
 const HashMap = require('./HashMap');
+const HashSet = require('./HashSet');
 
 const map = new HashMap();
 console.log(map.length());
@@ -55,3 +56,13 @@ console.log(map.get('test'));
 //   map.set(key, value);
 // }
 // map.toString();
+
+const set = new HashSet();
+
+set.set('test');
+console.log(set.length());
+console.log(set.toString());
+set.set('test');
+console.log(set.length());
+console.log(set.toString());
+console.log(set.get('test'));
