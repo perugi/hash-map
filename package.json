@@ -1,0 +1,29 @@
+{
+  "name": "@perugi/changeme",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CHANGEME",
+  "main": "package.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perugi/CHANGEME.git"
+  },
+  "author": "Dominik Perusko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/perugi/CHANGEME/issues"
+  },
+  "homepage": "https://github.com/perugi/CHANGEME#readme",
+  "devDependencies": {
+    "@perugi/eslint-config": "^1.0.3",
+    "@perugi/prettier-config": "^1.0.2",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1"
+  },
+  "prettier": "@perugi/prettier-config"
+}
