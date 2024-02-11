@@ -1,22 +1,21 @@
 {
-  "name": "@perugi/changeme",
+  "name": "hash-map",
   "version": "1.0.0",
-  "type": "module",
-  "description": "CHANGEME",
-  "main": "package.js",
+  "description": "A practice implementation of a Hash Map in JavaScript.",
+  "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/perugi/CHANGEME.git"
+    "url": "git+https://github.com/perugi/hash-map.git"
   },
   "author": "Dominik Perusko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/perugi/CHANGEME/issues"
+    "url": "https://github.com/perugi/hash-map/issues"
   },
-  "homepage": "https://github.com/perugi/CHANGEME#readme",
+  "homepage": "https://github.com/perugi/hash-map#readme",
   "devDependencies": {
     "@perugi/eslint-config": "^1.0.3",
     "@perugi/prettier-config": "^1.0.2",
@@ -25,5 +24,8 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1"
   },
-  "prettier": "@perugi/prettier-config"
+  "prettier": "@perugi/prettier-config",
+  "dependencies": {
+    "@perugi/linked-list": "^1.0.0"
+  }
 }
