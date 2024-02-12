@@ -1,5 +1,5 @@
 {
-  "name": "hash-map",
+  "name": "@perugi/hash-map",
   "version": "1.0.0",
   "description": "A practice implementation of a Hash Map in JavaScript.",
   "main": "HashMap.js",
