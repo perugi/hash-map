@@ -2,7 +2,7 @@
   "name": "hash-map",
   "version": "1.0.0",
   "description": "A practice implementation of a Hash Map in JavaScript.",
-  "main": "test.js",
+  "main": "HashMap.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

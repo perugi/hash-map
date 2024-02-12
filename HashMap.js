@@ -9,8 +9,6 @@ class HashMap {
 
   _threshold;
 
-  _storedElements;
-
   constructor() {
     this._capacity = 16;
     this._loadFactor = 0.75;
@@ -18,7 +16,6 @@ class HashMap {
     this._buckets = new Array(this._capacity)
       .fill(null)
       .map(() => new LinkedList());
-    this._storedElements = 0;
   }
 
   /**
@@ -36,9 +33,8 @@ class HashMap {
       bucket.at(listIndex).value[1] = value;
     } else {
       bucket.append([key, value]);
-      this._storedElements += 1;
 
-      if (this._storedElements >= this._threshold) {
+      if (this.keys().length >= this._threshold) {
         this._resize();
       }
     }
@@ -82,7 +78,6 @@ class HashMap {
 
     if (listIndex !== null) {
       bucket.removeAt(listIndex);
-      this._storedElements -= 1;
 
       return true;
     }
@@ -121,8 +116,6 @@ class HashMap {
     this._buckets = new Array(this._capacity)
       .fill(null)
       .map(() => new LinkedList());
-
-    this._storedElements = 0;
   }
 
   /**
