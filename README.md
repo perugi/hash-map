@@ -1,4 +1,4 @@
-# Linked List
+# Hash Map
 
 A practice implementation of a Hash Map in JavaScript as an ES6 Class, based on the specifications at: https://www.theodinproject.com/lessons/javascript-hashmap.
 
